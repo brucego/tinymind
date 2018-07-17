@@ -64,17 +64,17 @@ def densenet(images, num_classes=1001, is_training=False,
             # Put your code here.
             net = block(images, layers = 4, growth=4, scope=end_point)
             end_points[end_point] = net
-			net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
+            net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
 
             end_point = 'Conv2d_2a_3x3'
             net = block(images, layers = 4, growth=4, scope=end_point)
             end_points[end_point] = net
-			net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
+            net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
 			
             end_point = 'Conv2d_3a_3x3'
             net = block(images, layers = 4, growth=4, scope=end_point)
             end_points[end_point] = net
-			net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
+            net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
 			
             logits = slim.conv2d(net, num_classes, [1, 1], activation_fn=None,
                              normalizer_fn=None, scope='Conv2d_o_1x1')
