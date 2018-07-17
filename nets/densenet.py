@@ -51,20 +51,18 @@ def densenet(images, num_classes=1001, is_training=False,
     """
     growth = 24
     compression_rate = 0.5
-
+    end_point = ''
     def reduce_dim(input_feature):
         return int(int(input_feature.shape[-1]) * compression_rate)
 
     end_points = {}
 
     with tf.variable_scope(scope, 'DenseNet', [images, num_classes]):
-        with slim.arg_scope(bn_drp_scope(is_training=is_training,keep_prob=dropout_keep_prob)) as ssc:
-
+        with slim.arg_scope(bn_drp_scope(is_training=is_training,keep_prob=dropout_keep_prob)):
+            end_point = 'Conv2d_1a_3x3'
             ##########################
             # Put your code here.
-			end_point = 'Conv2d_1a_3x3'
             net = block(images, layers = 4, growth=8, scope=end_point)
-
             end_points[end_point] = net
 
             end_point = 'Conv2d_2a_3x3'
