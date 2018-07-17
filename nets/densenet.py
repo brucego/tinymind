@@ -73,7 +73,7 @@ def densenet(images, num_classes=1001, is_training=False,
             net = block(images, layers = 4, growth=8, scope=end_point)
             end_points[end_point] = net
 			
-            logits = slim.conv2d(net, num_classes, [1, 1], activation_fn=None,
+            logits = slim.conv2d(net, num_classes, [224, 224], activation_fn=None,
                              normalizer_fn=None, scope='Conv2d_o_1x1')
             #logits = tf.squeeze(logits, [1, 2], name='SpatialSqueeze')
             ##########################
