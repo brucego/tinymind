@@ -62,7 +62,7 @@ def densenet(images, num_classes=1001, is_training=False,
                                          keep_prob=dropout_keep_prob)) as ssc:
             ##########################
             # Put your code here.
-			for block_idx in range(nb_dense_block - 1):
+			for block_idx in range(5):
 				
 				end_point = 'Conv2d_1a_3x3'
 				net = block(images, layers = 4, growth=8, scope=end_point)
@@ -70,7 +70,7 @@ def densenet(images, num_classes=1001, is_training=False,
 				end_points[end_point] = net
 				
 			logits = slim.conv2d(net, num_classes, [1, 1], activation_fn=None,
-                             normalizer_fn=None, scope='Conv2d_out_1x1')
+                             normalizer_fn=None, scope='Conv2d_o_1x1')
             ##########################
 
     return 	logits, end_points
