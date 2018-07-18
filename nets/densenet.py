@@ -70,18 +70,18 @@ def densenet(images, num_classes=1001, is_training=False,
             net = block(images, layers = 4, growth=4, scope=end_point)
             end_points[end_point] = net
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
-			
+
             end_point = 'Conv2d_3a_3x3'
             net = block(images, layers = 4, growth=4, scope=end_point)
             end_points[end_point] = net
+
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
-			
+
             logits = slim.conv2d(net, num_classes, [1, 1], activation_fn=None,
                              normalizer_fn=None, scope='Conv2d_o_1x1')
             #logits = tf.squeeze(logits, [1, 2], name='SpatialSqueeze')
             ##########################
         return logits, end_points
-
 
 def bn_drp_scope(is_training=True, keep_prob=0.8):
     keep_prob = keep_prob if is_training else 1
