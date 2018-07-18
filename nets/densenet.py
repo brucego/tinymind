@@ -87,10 +87,11 @@ def densenet(images, num_classes=1001, is_training=False,
             net = slim.conv2d(net, 32, [3, 3], scope=scope + '_conv_pool_5')
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
             net = slim.max_pool2d(net, [2, 2], stride=2, scope=end_point)
-            #net = tf.reshape(net, [32,200])
+
 
             logits = slim.conv2d(net, num_classes, [1, 1], activation_fn=None,
                              normalizer_fn=None, scope='Conv2d_o_1x1')
+            logits = tf.squeeze(logits, name='SpatialSqueeze')
             #logits = tf.squeeze(logits, [1, 2], name='SpatialSqueeze')
             ##########################
         return logits, end_points
