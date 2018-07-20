@@ -31,6 +31,7 @@ def inception_v3_base(inputs,
                       min_depth=16,
                       depth_multiplier=1.0,
                       scope=None):
+	abk=c
   """Inception model from http://arxiv.org/abs/1512.00567.
 
   Constructs an Inception v3 network from inputs to the given final endpoint.
