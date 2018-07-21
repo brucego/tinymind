@@ -59,30 +59,30 @@ def densenet(images, num_classes=1001, is_training=False,
 
     with tf.variable_scope(scope, 'DenseNet', [images, num_classes]):
         with slim.arg_scope(bn_drp_scope(is_training=is_training,keep_prob=dropout_keep_prob)):
-            end_point = 'Conv2d_1a_7x7'
+            end_point = 'Conv2d_1a_7x7+1'
             ##########################
             # Put your code here.
-            net = slim.conv2d(images, 112, [7,7], stride = 2, padding ='SAME',  scope=scope + '7x7')
+            net = slim.conv2d(images, 112, [7,7], stride = 2, padding ='SAME',  scope=scope + '+7x7')
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
             # first block:
             net = block(net, layers = 6, growth=8, scope=end_point)
 
             # transition layer:
-            net = slim.conv2d(net, 56, [1, 1], scope=scope + 'trans1')
+            net = slim.conv2d(net, 56, [1, 1], scope=scope + 'trans1+')
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
 
             # second block:
             net = block(net, layers=12, growth=8, scope=end_point)
 
             # transition layer2:
-            net = slim.conv2d(net, 28, [1, 1], scope=scope + 'trans2')
+            net = slim.conv2d(net, 28, [1, 1], scope=scope + 'trans2+')
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
 
             # 3rd block:
             net = block(net, layers=24, growth=8, scope=end_point)
 
             # transition layer3:
-            net = slim.conv2d(net, 14 , [1, 1], scope=scope + 'trans2')
+            net = slim.conv2d(net, 14 , [1, 1], scope=scope + 'trans2+')
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
 
             # 4rd block:
