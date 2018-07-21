@@ -62,7 +62,7 @@ def densenet(images, num_classes=1001, is_training=False,
             end_point = 'Conv2d_1a_7x7+1'
             ##########################
             # Put your code here.
-            net = slim.conv2d(images, 112, [7,7], stride = 2, padding ='SAME',  scope=scope + '+7x7')
+            net = slim.conv2d(images, 112, [7,7], stride = 2, padding ='SAME',  scope=scope + '7x7')
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
             # first block:
             net = block(net, layers = 6, growth=8, scope=end_point)
