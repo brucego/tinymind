@@ -62,7 +62,6 @@ def densenet(images, num_classes=1001, is_training=False,
             end_point = 'Conv2d_1a_3x3'
             ##########################
             # Put your code here.
-			acb=b
             net = block(images, layers = 4, growth=4, scope=end_point)
             end_points[end_point] = net
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
