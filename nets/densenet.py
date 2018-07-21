@@ -69,21 +69,21 @@ def densenet(images, num_classes=1001, is_training=False,
             net = block(net, layers = 6, growth=8, scope=end_point)
 
             # transition layer:
-            net = slim.conv2d(net, 56, [1, 1], scope=scope + 'trans1+')
+            net = slim.conv2d(net, 56, [1, 1], scope=scope)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
 
             # second block:
             net = block(net, layers=12, growth=8, scope=end_point)
 
             # transition layer2:
-            net = slim.conv2d(net, 28, [1, 1], scope=scope + 'trans2+')
+            net = slim.conv2d(net, 28, [1, 1], scope=scope)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
 
             # 3rd block:
             net = block(net, layers=24, growth=8, scope=end_point)
 
             # transition layer3:
-            net = slim.conv2d(net, 14 , [1, 1], scope=scope + 'trans2+')
+            net = slim.conv2d(net, 14 , [1, 1], scope=scope)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
 
             # 4rd block:
