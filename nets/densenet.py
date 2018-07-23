@@ -99,9 +99,9 @@ def densenet(images, num_classes=1001, is_training=False,
             end_points[end_point] = net
 
             # 4rd block:
-            end_point = 'block4'
-            net = block(net, layers=16, growth=8, scope=end_point)
-            end_points[end_point] = net
+            #end_point = 'block4'
+            #net = block(net, layers=16, growth=8, scope=end_point)
+            #end_points[end_point] = net
 
 
             end_point = 'end'
