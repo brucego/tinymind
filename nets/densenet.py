@@ -93,7 +93,7 @@ def densenet(images, num_classes=1001, is_training=False,
             end_points[end_point] = net
 
             # transition layer3:
-            end_point = 'transition2'
+            end_point = 'transition3'
             net = slim.conv2d(net, 14 , [1, 1], scope=end_point)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
             end_points[end_point] = net
