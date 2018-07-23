@@ -77,7 +77,7 @@ def densenet(images, num_classes=1001, is_training=False,
             end_points[end_point] = net
 
             # second block:
-            end_point = 'block1'
+            end_point = 'block2'
             net = block(net, layers=12, growth=8, scope=end_point)
             end_points[end_point] = net
 
