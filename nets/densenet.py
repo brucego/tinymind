@@ -66,7 +66,7 @@ def densenet(images, num_classes=1001, is_training=False,
             #scope + '_7x7'
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
             # first block:
-			end_point = 'block1'
+            end_point = 'block1'
             net = block(net, layers = 6, growth=8, scope=end_point)
             end_points[end_point] = net
 
