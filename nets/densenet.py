@@ -100,15 +100,14 @@ def densenet(images, num_classes=1001, is_training=False,
 
             # 4rd block:
             end_point = 'block4'
-            net = block(net, layers=16, growth=8, scope=end_point)
+            net = block(net, layers=16, growth=10, scope=end_point)
             end_points[end_point] = net
 
 
             end_point = 'end'
             net = slim.avg_pool2d(net, [6, 6], scope=end_point)
             end_points[end_point] = net
-            logits=net
-            #logits = tf.squeeze(net, name='SpatialSqueeze')
+            logits = tf.squeeze(net, name='SpatialSqueeze')
             #logits = tf.squeeze(logits, [1, 2], name='SpatialSqueeze')
             ##########################
         return logits, end_points
