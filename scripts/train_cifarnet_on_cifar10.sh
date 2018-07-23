@@ -28,7 +28,7 @@ set -e
 TRAIN_DIR=~/tmp/cifarnet-model
 
 # Where the dataset is saved to.
-DATASET_DIR=/data/ai100/quiz-w7/quiz_train_00000of00004.tfrecord
+DATASET_DIR=~/tmp/cifar10/quiz_train_00000of00004.tfrecord
 
 # Download the dataset
 python download_and_convert_data.py \

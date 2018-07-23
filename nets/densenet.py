@@ -59,37 +59,54 @@ def densenet(images, num_classes=1001, is_training=False,
 
     with tf.variable_scope(scope, 'DenseNet', [images, num_classes]):
         with slim.arg_scope(bn_drp_scope(is_training=is_training,keep_prob=dropout_keep_prob)):
-            end_point = 'Conv2d_1a_7x7'
+            end_point = 'Conv2d_1a_7x7_'
             ##########################
             # Put your code here.
             net = slim.conv2d(images, 112, [7,7], stride = 2, padding ='SAME',  scope=end_point)
             #scope + '_7x7'
             net = slim.max_pool2d(net, [3, 3], stride=2, scope=end_point)
             # first block:
+			end_point = 'block1'
             net = block(net, layers = 6, growth=8, scope=end_point)
+            end_points[end_point] = net
 
             # transition layer:
+			end_point = 'transition1'
             net = slim.conv2d(net, 56, [1, 1], scope=scope)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
+            end_points[end_point] = net
 
             # second block:
+            end_point = 'block1'
             net = block(net, layers=12, growth=8, scope=end_point)
+            end_points[end_point] = net
 
             # transition layer2:
+            end_point = 'transition2'
             net = slim.conv2d(net, 28, [1, 1], scope=scope)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
+            end_points[end_point] = net
 
             # 3rd block:
+            end_point = 'block3'
             net = block(net, layers=24, growth=8, scope=end_point)
+            end_points[end_point] = net
 
             # transition layer3:
+            end_point = 'transition2'
             net = slim.conv2d(net, 14 , [1, 1], scope=scope)
             net = slim.avg_pool2d(net, [2, 2], stride=2, scope=end_point)
+            end_points[end_point] = net
 
             # 4rd block:
+            end_point = 'block4'
             net = block(net, layers=16, growth=8, scope=end_point)
+            end_points[end_point] = net
 
+
+            end_point = 'end'
             net = slim.avg_pool2d(net, [7, 7], scope=end_point)
+            end_points[end_point] = net
 
             logits = tf.squeeze(net, name='SpatialSqueeze')
             #logits = tf.squeeze(logits, [1, 2], name='SpatialSqueeze')
